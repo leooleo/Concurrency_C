@@ -1,0 +1,47 @@
+1) Um processo é uma entidade ativa de um programa(que por sua vez é passivo). 
+Um processo tabmém pode ser definido pelos seus contextos(hardware(registradores), 
+software e espaço de endereçamento). Já uma thread é uma subdivisão de processo. 
+Nessa definição um processo pode ter várias threads, ou seja, linhas de execução 
+paralelas e independentes entre si, assim usando melhor os recursos da CPU.
+
+2) Processos concorrentes sofrem troca de contexto. 
+Isso quer dizer que enquanto um não precisa da CPU(digamos E/S),
+esta troca seu contexto para um que precise da mesma e vice-versa. 
+Em suma é utilizado de melhor forma o processador, visto que esse 
+não fica ocioso, consumindo menos tempo.
+
+3)Condição de corrida ocorre quando dois ou mais processos acessam uma 
+área de memória compartilhada, também definida como RC, e o resultado 
+depende de qual e quando acessa. Para evitar erros de acesso de ambos, 
+usa-se a exclusão mútua, que impede que mais de um processo atinja a RC.
+
+4) Deadlocks ocorrem quando processos esperam por algum tipo de permissão 
+para voltarem à sua execução, porém essa permissão não ocorre. Ou seja, 
+ficam bloqueados infinitamente. Starvation se remete a um processo de menor 
+prioridade bloqueado por um de maior e, dessa forma, não consegue executar o que deveria.
+
+5) Isso pode ser feito com exclusão mútua. Para tal podemos utilizar 
+locks e waits que bloqueiam processos que tentam acessar a RC ao msm
+tempo. Ou pode-se também usar semáforos que em sua essência possuem 
+contadores que atribuem ou retiram permissões da RC. Ambos são equivalentes: 
+um pode ser implementado usando o outro.
+
+6) Se os dois processos executam as primeiras duas linhas ao msm tempo quando cada um chegar em sua terceira linha vão entrar em deadlock e entrarão em ócio infinito. 
+Resolução:
+
+p1{
+	lock(lx)	
+	x++
+	x += y
+	unlock(lx)
+}
+
+p2 {
+	lock(lx)
+	y++
+	y += x
+	unlock(lx)	
+}
+ 
+8) Um dos problemas é que ele obriga a alternância, então mesmo que um
+processo não precise da CPU naquele momento ele vai usa-la de forma ociosa. 
